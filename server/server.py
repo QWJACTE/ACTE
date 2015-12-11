@@ -4,7 +4,7 @@
 import socket
 from handle import *
 
-HOST = 'localhost'
+HOST = '121.42.145.248'
 PORT = 8080
 
 def main():
