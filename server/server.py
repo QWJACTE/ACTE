@@ -13,6 +13,7 @@ def main():
     ss.listen(5)
 
     while True:
+        print 'begin accept'
         conn, addr = ss.accept()
         # record Client address
         log.get_log('Client addr', str(addr))
