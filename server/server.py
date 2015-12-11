@@ -23,7 +23,8 @@ def main():
             back_msg = handle.handle(buf)
             if back_msg[0] == const.ILLEGAL_REQUEST:
                 raise ILLEGAL_REQUEST_EXCEPTION
-            else conn.sendall(back_msg[1])
+            else:
+                conn.sendall(back_msg[1])
         except socket.timeout:
             print 'time out'
         except ILLEGAL_REQUEST_EXCEPTION:
