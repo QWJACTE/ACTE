@@ -1,11 +1,21 @@
 #!/usr/bin/python
 # -*- encoding=utf-8 -*-
 
+from flask import Flask, request, jsonify, render_template
 import socket
 from handle import *
+app = Flask(__name__)
 
 HOST = '121.42.145.248'
 PORT = 8080
+
+@app.route('/')
+def hello_world():
+    return 'Hello World!'
+
+@app.route('/readme')
+def readme():
+    return render_template('readme.txt',abc='helloworld')
 
 def main():
     ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -35,4 +45,4 @@ def main():
     ss.close()
 
 if __name__ == '__main__':
-    main()
+    app.run()
