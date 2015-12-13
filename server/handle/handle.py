@@ -1,3 +1,4 @@
+# -*- endcoding=utf-8 -*-
 '''
 This file used for handle msg from Client
 and resend msg to the Client for require
@@ -15,7 +16,7 @@ from flask import Flask, request, jsonify, render_template
 import MySQLdb
 
 def handle(msg):
-    return 'good', 'get it'
+    return 'good'
 
 def signup(uid, password):
     '''
@@ -23,20 +24,20 @@ def signup(uid, password):
     uid and password is necessary.
     '''
     # Open database connection
-    db = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
+    #db = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
     # prepare a cursor object using cursor() method
-    cursor = db.cursor()
-    if findUserByUid(cursor, uid):
-        success = False
-        data = '用户已经存在'
-    else:
-        success = True
-        insertUser(cursor, uid, password)
-        Userid = cursor.fetchone()[0]
-        data = jsonify(msg='注册成功',username=uid,Userid=id)
-    # disconnect from server
-    db.close()
-    return jsonify(success=success,msg=data)
+    #cursor = db.cursor()
+    #if findUserByUid(cursor, uid):
+    #    success = False
+    #    data = '用户已经存在'
+    #else:
+    #    success = True
+    #    insertUser(cursor, uid, password)
+    #    Userid = cursor.fetchone()[0]
+    #    data = jsonify(msg='注册成功',username=uid,Userid=id)
+    ## disconnect from server
+    #db.close()
+    #return jsonify(success=success,msg=data)
 
 def findUserByUid(cursor, uid):
     '''
@@ -45,7 +46,8 @@ def findUserByUid(cursor, uid):
     '''
     if cursor.execute('select * from User where UID = \''+uid+'\'') == 1:
         return True
-    else return False
+    else:
+        return False
 
 def insertUser(cursor, uid, password):
     '''
