@@ -73,7 +73,8 @@ create table Activity (
     id          int             not null auto_increment,
     owner_id    int             not null,
     AID         varchar(50)     not null,
-    full_name   varchar(50),
+    full_name   varchar(50)     not null,
+    ActPic      varchar(100)    not null, -- 12/14/2015添加
     begin_date  timestamp       not null,
     end_date    timestamp       not null,
     create_date timestamp,

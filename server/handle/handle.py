@@ -15,6 +15,11 @@ DATABASE = 'ACTE'
 from flask import Flask, request, jsonify, render_template
 import MySQLdb
 
+def getDC():
+    db = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
+    cursor = db.cursor()
+    return db, cursor
+
 def handle(msg):
     return 'good'
 
@@ -23,10 +28,7 @@ def signup(uid, password):
     This method used for user to signup
     uid and password is necessary.
     '''
-    # Open database connection
-    db = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
-    # prepare a cursor object using cursor() method
-    cursor = db.cursor()
+    db, cursor = getDC()
     if findUserByUid(cursor, uid):
         success = False
         data = '用户已经存在'
@@ -62,3 +64,53 @@ def insertUser(db, cursor, uid, password):
     except:
         db.rollback()
         return -1
+
+def login(uid, password):
+    db, cursor = getDC()
+    if findUserByUid(cursor, uid):
+        if cursor.fetchone()[2] == password:
+            success = True
+            data = '登入成功'
+        else:
+            success = False
+            data = '账号或密码错误'
+    else:
+        success = False
+        data = '账号或密码错误'
+    db.close()
+    return jsonify(success=success,msg=data)
+
+def confirmUserPass(cursor, uid, password):
+    # todo...
+
+def updatebasic(uid):
+    db, cursor = getDC()
+    if findUserByUid(cursor, uid):
+        return 'nothing'
+    else:
+        return 'nothing'
+
+def findAllAct(cursor):
+    cursor.execute('select * from Activity')
+    return [i[0] for i in cursor.fetchall()]
+
+def updaterecommendation(uid):
+    db, cursor = getDC()
+    actList = findAllAct(cursor)
+    return jsonify(success=True, actid=actList[0])
+
+def findActByid(aid):
+    if 1 == cursor.execute('select * from Activity where id =' + str(aid)):
+        return True
+    else:
+        return False
+
+def updaterecommendationimage(aid):
+    db, cursor = getDC()
+    if findActByid(aid):
+        success = True
+        oneAct = cursor.fetchone()[4]
+    else:
+        success = False
+        oneAct = 'nothing'
+    return jsonify(success=success, actImg=oneAct)
