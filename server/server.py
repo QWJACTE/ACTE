@@ -34,6 +34,14 @@ def signup():
     elif password == '':
         return jsonify(success=False, msg=u'请输入密码')
     else:
+        try:
+            a = handle.signup(uid, password)
+        except Exception, e:
+            return jsonify(success=False,msg=str(e))
+        else:
+            pass
+        finally:
+            pass
         return handle.signup(uid, password)
 
 # def main():

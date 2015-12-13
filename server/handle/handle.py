@@ -22,22 +22,21 @@ def signup(uid, password):
     This method used for user to signup
     uid and password is necessary.
     '''
-    return jsonify(success=False,msg='注册成功')
     # Open database connection
-    # db = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
-    # # prepare a cursor object using cursor() method
-    # cursor = db.cursor()
-    # if findUserByUid(cursor, uid):
-    #     success = False
-    #     data = '用户已经存在'
-    # else:
-    #     success = True
-    #     insertUser(cursor, uid, password)
-    #     Userid = cursor.fetchone()[0]
-    #     data = jsonify(msg='注册成功',username=uid,Userid=id)
-    # # disconnect from server
-    # db.close()
-    # return jsonify(success=success,msg=data)
+    db = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
+    # prepare a cursor object using cursor() method
+    cursor = db.cursor()
+    if findUserByUid(cursor, uid):
+        success = False
+        data = '用户已经存在'
+    else:
+        success = True
+        insertUser(cursor, uid, password)
+        Userid = cursor.fetchone()[0]
+        data = jsonify(msg='注册成功',username=uid,Userid=id)
+    # disconnect from server
+    db.close()
+    return jsonify(success=success,msg=data)
 
 def findUserByUid(cursor, uid):
     '''
