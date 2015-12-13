@@ -1,6 +1,15 @@
+/* 
+** 注：因为数据库数据默认的编码拉丁文，所以需要改变mysql的配置文件，
+** 来让它支持中文，具体方法是：在/etc/mysql/my.cnf文件里的[mysqld]下
+** 增加
+**      character_set_server=utf8
+**      init_connect='SET NAMES utf8'
+** 这样两行。
+*/
 drop database if exists ACTE;
 create database ACTE;
 use ACTE;
+
 -- 第一个用户默认设成unknown
 create table User (
     id          int             not null auto_increment,
@@ -11,13 +20,16 @@ create table User (
     headpic     varchar(100),
     birthday    date    default null,
     email       varchar(50),
+    location    varchar(20),
     description varchar(50) default null,
     status      enum('N','Y') default 'N',
-    primary key(id, UID)
+    primary key(id),
+    unique(UID)
 );
+insert into User(UID,password) values('unknown', 'unknown');
 -- 第一个活动举办者默认设成unknown
 create table Sponsor (
-    id          int             not null auto_increment ,
+    id          int             not null auto_increment,
     SID         varchar(20)     not null,
     password    varchar(20)     not null,
     ACT_type    varchar(20)     not null,
@@ -27,10 +39,26 @@ create table Sponsor (
     headpic     varchar(100),
     birthday    date    default null,
     email       varchar(50),
+    location    varchar(20),
     description varchar(50) default null,
     status      enum('N','Y') default 'Y',
-    primary key(id, SID)
+    primary key(id),
+    unique(SID)
 );
+insert into Sponsor(SID, password, ACT_type, company_name) values('unknown','unknown','unknown','unknown');
+create table City (
+    CID         int             not null,
+    name        varchar(20)     not null,
+    weather     varchar(100),
+    primary key(CID)
+);
+-- 全国城市代码 还有很多
+insert into City(name, CID) values
+    ('北京',101010100),
+    ('上海',101020100),
+    ('广州',101280101),
+    ('珠海',101280701),
+    ('赣州',101240701);
 
 create table follow (
     Uid         int             not null,
@@ -52,7 +80,7 @@ create table Activity (
     introduction    varchar(200) default 'none',
     location    varchar(100)    not null,
     type        varchar(20) default 'others',
-    primary key(id, owner_id),
+    primary key(id),
     foreign key(owner_id) references Sponsor(id)
 );
 
