@@ -22,6 +22,7 @@ def signup(uid, password):
     This method used for user to signup
     uid and password is necessary.
     '''
+    return jsonify(success=False,msg='注册成功')
     # Open database connection
     db = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
     # prepare a cursor object using cursor() method
