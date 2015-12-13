@@ -28,10 +28,10 @@ def readme():
 @app.route('/signup', methods=['POST'])
 def signup():
     uid = request.form['uid']
-    password = 'bb'request.form['password']
+    password = request.form['password']
     if uid != '' and password != '':
-        return "get it"
-    else: return "get nothing"
+        return jsonify(success=True,msg=u'还不错')
+    else: return jsonify(success=False,msg=u"get nothing")
 
 def main():
     ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
