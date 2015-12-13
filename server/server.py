@@ -34,17 +34,7 @@ def signup():
     elif password == '':
         return jsonify(success=False, msg=u'请输入密码')
     else:
-        return jsonify(success=False, msg=u'注册成功')
-        #return jsonify(success=False, msg=handle.handle('dd'))
-        #try:
-        #    a = handle.signup(uid, password)
-        #except Exception, e:
-        #    return jsonify(success=False,msg=str(e))
-        #else:
-        #    pass
-        #finally:
-        #    pass
-        #return handle.signup(uid, password)
+        return handle.signup(uid, password)
 
 # def main():
 #     ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

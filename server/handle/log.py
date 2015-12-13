@@ -1,3 +1,6 @@
+# -*- encoding=utf-8 -*-
+import time
+
 def get_log(tag, msg):
     '''
     put log message to its special log files
