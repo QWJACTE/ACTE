@@ -25,13 +25,14 @@ def post():
 def get():
     # todo....
 
-@app.route('/signup', method=['POST'])
+@app.route('/signup')
 def signup():
-    uid = request.form['uid']
-    password = request.form['password']
-    if uid != '' and password != '':
-        return "get it"
-    else: return "get nothing"
+#    uid = 'hello'#request.form['uid']
+#    password = 'bb'request.form['password']
+#    if uid != '' and password != '':
+#        return "get it"
+#    else: return "get nothing"
+    return 'hello'
 
 # def main():
 #     ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
