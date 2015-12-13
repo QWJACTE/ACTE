@@ -28,13 +28,15 @@ def signup(uid, password):
     # prepare a cursor object using cursor() method
     cursor = db.cursor()
     if findUserByUid(cursor, uid):
-       success = False
-       data = '用户已经存在'
+        success = False
+        data = '用户已经存在'
     else:
-       success = True
-       insertUser(cursor, uid, password)
-       Userid = cursor.fetchone()[0]
-       data = jsonify(msg='注册成功',username=uid,Userid=id)
+        success = True
+        if insertUser(db, cursor, uid, password) == 0:
+            data = '注册成功'
+        else:
+            success = False
+            data = '注册失败'
     # disconnect from server
     db.close()
     return jsonify(success=success,msg=data)
@@ -49,8 +51,14 @@ def findUserByUid(cursor, uid):
     else:
         return False
 
-def insertUser(cursor, uid, password):
+def insertUser(db, cursor, uid, password):
     '''
     insert a new user
     '''
-    cursor.execute('insert into User(UID, password) value(\''+uid+'\',\''+password+'\')')
+    try:
+        cursor.execute('insert into User(UID, password) value(\''+uid+'\','+str(password)+')')
+        db.commit()
+        return 0
+    except:
+        db.rollback()
+        return -1
