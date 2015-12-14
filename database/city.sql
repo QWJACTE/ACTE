@@ -1,3 +1,4 @@
+use ACTE;
 insert into City(CID,name) values
 (101010100,'北京'),
 (101010200,'海淀'),
