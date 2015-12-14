@@ -22,12 +22,12 @@ def readme():
 def signup():
     uid = request.form['uid']
     password = request.form['password']
-    if uid == '':
-        return jsonify(success=False, msg=u'请输入用户名')
-    elif password == '':
-        return jsonify(success=False, msg=u'请输入密码')
-    else:
-        return handle.signup(uid, password)
+    nickname = request.form['nickname']
+    sex = request.form['sex']
+    birthday = request.form['birthday']
+    email = request.form['email']
+    location = request.form['location']
+    return handle.signup(uid, password, nickname, sex, birthday, email, location)
 
 @app.route('/login', methods=['POST'])
 def login():

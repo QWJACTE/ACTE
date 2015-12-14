@@ -11,6 +11,7 @@ HOST = 'localhost'
 USER = 'root'
 PASSWORD = '19660120Zlp'# my mother's birthday!
 DATABASE = 'ACTE'
+null = 'NULL'
 
 from flask import Flask, request, jsonify, render_template
 import MySQLdb
@@ -23,7 +24,7 @@ def getDC():
 def handle(msg):
     return 'good'
 
-def signup(uid, password):
+def signup(uid, password, nickname=null,sex='secret',birthday=null,email=null,location=null):
     '''
     This method used for user to signup
     uid and password is necessary.
@@ -34,7 +35,7 @@ def signup(uid, password):
         data = '用户已经存在'
     else:
         success = True
-        if insertUser(db, cursor, uid, password) == 0:
+        if insertUser(db, cursor, uid, password,nickname,sex,birthday,email,location) == 0:
             data = '注册成功'
         else:
             success = False
@@ -53,12 +54,12 @@ def findUserByUid(cursor, uid):
     else:
         return False
 
-def insertUser(db, cursor, uid, password):
+def insertUser(db,cursor,uid,password,nickname,sex,birthday,email,location):
     '''
     insert a new user
     '''
     try:
-        cursor.execute('insert into User(UID, password) value(\''+uid+'\','+str(password)+')')
+        cursor.execute('insert into User(UID,password,nickname,sex,birthday,email,location) value(\''+str(uid)+'\',\''+str(password)+'\',\''+str(nickname)+'\',\''+str(sex)+'\',\''+str(birthday)+'\',\''+str(email)+'\',\''+str(location)+'\')')
         db.commit()
         return 0
     except:
