@@ -96,14 +96,10 @@ def findAllAct(cursor):
 
 def updaterecommendation(uid):
     db, cursor = getDC()
-    actList = findAllAct(cursor)
-    return jsonify(success=True, actid=actList[0])
+    return jsonify(success=True, actid=findAllAct(cursor)[0])
 
 def findActByid(aid):
-    if 1 == cursor.execute('select * from Activity where id =' + str(aid)):
-        return True
-    else:
-        return False
+    return True if 1 == cursor.execute('select * from Activity where id ='+str(aid)) else False
 
 def updaterecommendationimage(aid):
     db, cursor = getDC()

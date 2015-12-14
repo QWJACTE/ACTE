@@ -57,6 +57,10 @@ def updaterecommendationimage(aid=None):
     else:
         return handle.updaterecommendationimage(aid)
 
+@app.route('/image')
+def image():
+    return render_template('1.jpg')
+
 @app.errorhandler(404)
 def page_not_found(error):
     return u'你走错门了'
