@@ -80,9 +80,6 @@ def login(uid, password):
     db.close()
     return jsonify(success=success,msg=data)
 
-#def confirmUserPass(cursor, uid, password):
-    # todo...
-
 def updatebasic(uid):
     db, cursor = getDC()
     if findUserByUid(cursor, uid):

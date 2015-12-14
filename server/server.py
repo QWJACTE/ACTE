@@ -42,18 +42,18 @@ def login():
 
 @app.route('/updatebasic/', methods=['GET'])
 @app.route('/updatebasic/<uid>', methods=['GET'])
-def updatebasic(uid=None):
+def updatebasic(uid=''):
     return handle.updatebasic(uid)
 
 @app.route('/updaterecommendation/', methods=['GET'])
 @app.route('/updaterecommendation/<uid>', methods=['GET'])
-def updaterecommendation(uid=None):
+def updaterecommendation(uid=''):
     return handle.updaterecommendation(uid)
 
 @app.route('/updaterecommendationimage/', methods=['GET'])
 @app.route('/updaterecommendationimage/<aid>', methods=['GET'])
-def updaterecommendationimage(aid=None):
-    if aid == None:
+def updaterecommendationimage(aid=''):
+    if aid == '':
         return jsonify(success=False, msg=u'没有活动id')
     else:
         return handle.updaterecommendationimage(aid)
@@ -65,6 +65,11 @@ def image():
 @app.errorhandler(404)
 def page_not_found(error):
     return u'你走错门了'
+
+
+if __name__ == '__main__':
+    app.run()
+
 
 # def main():
 #     ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -92,6 +97,3 @@ def page_not_found(error):
 #         conn.close()
 
 #     ss.close()
-
-if __name__ == '__main__':
-    app.run(debug=True)
