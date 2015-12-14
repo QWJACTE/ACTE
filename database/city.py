@@ -1,4 +1,5 @@
 # -*- encoding=utf-8 -*-
+#!/usr/bin/python
 
 import MySQLdb
 
@@ -14,7 +15,11 @@ wordlist = []
 with open('city.txt', 'r') as fr:
     for word in fr.readlines():
         a = word.strip().split(' ')
-        cursor.execute('insert into City(CID,name)value('+word[0]+',\''+word[1]+'\'')')
+        try:
+            cursor.execute('insert into City(CID,name) values(\''+a[0]+'\',\''+a[1]+'\')')
+            db.commit()
+        except:
+            db.rollback()
         wordlist.append(a)
 
 db.close()
