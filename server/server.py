@@ -7,8 +7,8 @@ import socket
 from handle import *
 app = Flask(__name__)
 
-HOST = '121.42.145.248'
-PORT = 8080
+# HOST = '121.42.145.248'
+# PORT = 8080
 
 @app.route('/')
 def hello_world():
