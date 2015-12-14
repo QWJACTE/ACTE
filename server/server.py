@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # -*- encoding=utf-8 -*-
 
-from flask import Flask, request, jsonify, render_template
+import os
+from flask import send_from_directory,Flask, request, jsonify, render_template
 import socket
 from handle import *
 app = Flask(__name__)
@@ -59,7 +60,7 @@ def updaterecommendationimage(aid=None):
 
 @app.route('/image')
 def image():
-    return render_template('1.jpg')
+    return send_from_directory(os.path.join(app.root_path,'templates'),'1.jpg')
 
 @app.errorhandler(404)
 def page_not_found(error):
