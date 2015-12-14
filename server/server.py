@@ -17,14 +17,6 @@ def hello_world():
 def readme():
     return render_template('readme.txt',abc='helloworld')
 
-# @app.route('/post', method=['POST'])
-# def post():
-#     # todo....
-
-# @app.route('/get', method=['GET'])
-# def get():
-#     # todo....
-
 @app.route('/signup', methods=['POST'])
 def signup():
     uid = request.form['uid']
@@ -36,7 +28,7 @@ def signup():
     else:
         return handle.signup(uid, password)
 
-@app.route('/login', method=['GET'])
+@app.route('/login', methods=['POST'])
 def login():
     uid = request.form['uid']
     password = request.form['password']
@@ -47,18 +39,18 @@ def login():
     else:
         return handle.login(uid, password)
 
-@app.route('/updatebasic/', method=['GET'])
-@app.route('/updatebasic/<uid>', method=['GET'])
+@app.route('/updatebasic/', methods=['GET'])
+@app.route('/updatebasic/<uid>', methods=['GET'])
 def updatebasic(uid=None):
     return handle.updatebasic(uid)
 
-@app.route('/updaterecommendation/', method=['GET'])
-@app.route('/updaterecommendation/<uid>', method=['GET'])
+@app.route('/updaterecommendation/', methods=['GET'])
+@app.route('/updaterecommendation/<uid>', methods=['GET'])
 def updaterecommendation(uid=None):
     return handle.updaterecommendation(uid)
 
-@app.route('/updaterecommendationimage/', method=['GET'])
-@app.route('/updaterecommendationimage/<aid>', method=['GET'])
+@app.route('/updaterecommendationimage/', methods=['GET'])
+@app.route('/updaterecommendationimage/<aid>', methods=['GET'])
 def updaterecommendationimage(aid=None):
     if aid == None:
         return jsonify(success=False, msg=u'没有活动id')
@@ -97,4 +89,4 @@ def page_not_found(error):
 #     ss.close()
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
