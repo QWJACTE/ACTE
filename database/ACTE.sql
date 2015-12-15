@@ -73,11 +73,10 @@ create table Activity (
     id          int             not null auto_increment,
     owner_id    int             not null,
     AID         varchar(50)     not null,
-    full_name   varchar(50)     not null,
-    ActPic      varchar(100)    not null, -- 12/14/2015添加
+    full_name   varchar(50),
+    create_date timestamp,
     begin_date  timestamp       not null,
     end_date    timestamp       not null,
-    create_date timestamp,
     introduction    varchar(200) default 'none',
     location    varchar(100)    not null,
     type        varchar(20) default 'others',
@@ -122,5 +121,20 @@ create table comment (
     comment_date timestamp,
     primary key(id, Uid, Aid),
     foreign key(Uid) references User(id),
-    foreign key(Aid) references Activity(id)  
+    foreign key(Aid) references Activity(id)
 );
+
+insert into User(UID,password,nickname,sex,birthday,email,location) valuse
+    ('andy','123456','andee','man',null,null,'珠海');
+
+insert into Sponsor(SID,password,ACT_type,company_name) values
+    ('jamoeba','19940818','acg','acte'),
+    ('jingle','19940818','music','acte');
+
+insert into Activity(owner_id,AID,full_name,ActPic,begin_date,end_date,create_date,introduction,location,type) values
+    ('2','happyeve','幸福生活每一天','2','20150818','20160818','20151201','大家聚 在一起享受快乐幸福的生活','珠海','others'),
+    ('2','goodmorning','健康早操','3','20151101','20161101','20151201','美好生活从早上做起','珠海','others'),
+    ('3','百人漫展','happyacg','4','20150818','20160818','20151201','在这里什么都不想，就是玩！','珠海','acg'),
+    ('3','百人漫展','happyacg','5','20150818','20160818','20151201','在这里什么都不想，就是玩！','珠海','acg'),
+    ('3','百人漫展','happyacg','6','20150818','20160818','20151201','在这里什么都不想，就是玩！','珠海','acg'),
+    ('3','百人漫展','happyacg','7','20150818','20160818','20151201','在这里什么都不想，就是玩！','珠海','acg');

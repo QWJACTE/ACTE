@@ -60,7 +60,16 @@ def updaterecommendationimage(aid=''):
 
 @app.route('/image')
 def image():
-    return send_from_directory(os.path.join(app.root_path,'templates'),'1.jpg')
+    return send_from_directory(os.path.join(app.root_path,'templates/img'),'1.jpg')
+
+@app.route('/loadimage/<imginfo>', methods=['GET'])
+def loadimage(imginfo):
+    uid, img = imginfo.split(' ')
+    imgtab = int(img[0:2])
+    imgsection = int(img[2:4])
+    imgposition = int(img[4:7])
+    imgurl = sendimage(uid,imgtab,imgsection,imgposition)
+    return send_from_directory(os.path.join(app.root_path,'templates/img'),imgurl)
 
 @app.errorhandler(404)
 def page_not_found(error):
