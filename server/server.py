@@ -63,13 +63,13 @@ def image():
     return send_from_directory(os.path.join(app.root_path,'templates/img'),'1.jpg')
 
 @app.route('/loadimage/<imginfo>', methods=['GET'])
-def loadimage(imginfo):
-    uid, img = imginfo.split(' ')
-    imgtab = int(img[0:2])
-    imgsection = int(img[2:4])
-    imgposition = int(img[4:7])
-    imgurl = sendimage(uid,imgtab,imgsection,imgposition)
-    return send_from_directory(os.path.join(app.root_path,'templates/img'),imgurl)
+def loadimage(imginfo='unknown_0101001'):
+    uid, img = ('%s' % imginfo).split('_')
+    imgtab = int(str(img)[0:2])
+    imgsection = int(str(img)[2:4])
+    imgposition = int(str(img)[4:7])
+    imgurl = handle.sendimage(str(uid),imgtab,imgsection,imgposition)
+    return send_from_directory(os.path.join(app.root_path,'templates/img'),'1.jpg')
 
 @app.errorhandler(404)
 def page_not_found(error):

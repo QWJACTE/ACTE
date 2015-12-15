@@ -100,7 +100,7 @@ def findActByid(aid):
     return True if 1 == cursor.execute('select * from Activity where id ='+str(aid)) else False
 
 def sendimage(uid,imgtab,imgsection,imgposition):
-    url = int(imgposition+1)
+    url = str(imgposition+1)
     return url + '.jpg'
 
 def updaterecommendationimage(aid):

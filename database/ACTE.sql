@@ -52,13 +52,6 @@ create table City (
     weather     varchar(100),
     primary key(CID)
 );
--- 全国城市代码 还有很多
-insert into City(name, CID) values
-    ('北京',101010100),
-    ('上海',101020100),
-    ('广州',101280101),
-    ('珠海',101280701),
-    ('赣州',101240701);
 
 create table follow (
     Uid         int             not null,
@@ -74,6 +67,7 @@ create table Activity (
     owner_id    int             not null,
     AID         varchar(50)     not null,
     full_name   varchar(50),
+    ActPic      varchar(100)    not null,
     create_date timestamp,
     begin_date  timestamp       not null,
     end_date    timestamp       not null,
@@ -124,7 +118,7 @@ create table comment (
     foreign key(Aid) references Activity(id)
 );
 
-insert into User(UID,password,nickname,sex,birthday,email,location) valuse
+insert into User(UID,password,nickname,sex,birthday,email,location) values
     ('andy','123456','andee','man',null,null,'珠海');
 
 insert into Sponsor(SID,password,ACT_type,company_name) values
