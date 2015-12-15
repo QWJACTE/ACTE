@@ -69,7 +69,7 @@ def loadimage(imginfo='unknown_0101001'):
     imgsection = int(str(img)[2:4])
     imgposition = int(str(img)[4:7])
     imgurl = handle.sendimage(str(uid),imgtab,imgsection,imgposition)
-    return send_from_directory(os.path.join(app.root_path,'templates/img'),'1.jpg')
+    return send_from_directory(os.path.join(app.root_path,'templates/img'),imgurl)
 
 @app.errorhandler(404)
 def page_not_found(error):
