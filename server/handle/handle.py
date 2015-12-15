@@ -84,8 +84,10 @@ def login(uid, password):
 def updatebasic(uid):
     db, cursor = getDC()
     if findUserByUid(cursor, uid):
+        db.close()
         return 'nothing'
     else:
+        db.close()
         return 'nothing'
 
 def findAllAct(cursor):
@@ -96,19 +98,26 @@ def updaterecommendation(uid):
     db, cursor = getDC()
     return jsonify(success=True, actid=findAllAct(cursor)[0])
 
-def findActByid(aid):
-    return True if 1 == cursor.execute('select * from Activity where id ='+str(aid)) else False
+def findActByid(cursor,actid):
+    return True if 1 == cursor.execute('select * from Activity where id ='+str(actid)) else False
 
 def sendimage(uid,imgtab,imgsection,imgposition):
-    url = str(imgposition+2)
+    db, cursor = getDC()
+    actid = imgposition+1
+    if findActByid(cursor,actid):
+        a = cursor.fetchone()
+        url=a[4]
+    else:
+        url='1'
     return url + '.jpg'
 
-def updaterecommendationimage(aid):
+def updaterecommendationimage(actid):
     db, cursor = getDC()
-    if findActByid(aid):
+    if findActByid(cursor,actid):
         success = True
         oneAct = cursor.fetchone()[4]
     else:
         success = False
         oneAct = 'nothing'
+    db.close()
     return jsonify(success=success, actImg=oneAct)

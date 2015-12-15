@@ -51,12 +51,12 @@ def updaterecommendation(uid=''):
     return handle.updaterecommendation(uid)
 
 @app.route('/updaterecommendationimage/', methods=['GET'])
-@app.route('/updaterecommendationimage/<aid>', methods=['GET'])
-def updaterecommendationimage(aid=''):
-    if aid == '':
+@app.route('/updaterecommendationimage/<actid>', methods=['GET'])
+def updaterecommendationimage(actid=''):
+    if actid == '':
         return jsonify(success=False, msg=u'没有活动id')
     else:
-        return handle.updaterecommendationimage(aid)
+        return handle.updaterecommendationimage(actid)
 
 @app.route('/image')
 def image():
