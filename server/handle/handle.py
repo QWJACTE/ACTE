@@ -111,6 +111,17 @@ def sendimage(uid,imgtab,imgsection,imgposition):
         url='1'
     return url + '.jpg'
 
+def sendtitle(uid,tab,section,position):
+    db, cursor = getDC()
+    actid = position+1
+    if findActByid(cursor, actid):
+        a = cursor.fetchone()
+        text=a[2]
+        success=True
+        return success, text
+    else:
+        return False, 'none'
+
 def updaterecommendationimage(actid):
     db, cursor = getDC()
     if findActByid(cursor,actid):

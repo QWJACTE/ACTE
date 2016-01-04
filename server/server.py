@@ -65,11 +65,20 @@ def image():
 @app.route('/loadimage/<imginfo>', methods=['GET'])
 def loadimage(imginfo='unknown_0101001'):
     uid, img = ('%s' % imginfo).split('_')
-    imgtab = int(str(img)[0:2])
-    imgsection = int(str(img)[2:4])
-    imgposition = int(str(img)[4:7])
-    imgurl = handle.sendimage(str(uid),imgtab,imgsection,imgposition)
+    tab = int(str(img)[0:2])
+    section = int(str(img)[2:4])
+    position = int(str(img)[4:7])
+    imgurl = handle.sendimage(str(uid),tab,section,position)
     return send_from_directory(os.path.join(app.root_path,'templates/img'),imgurl)
+
+@app.route('/loadtext/<textinfo>', methods=['GET'])
+def loadtext(textinfo='unknown_0101001'):
+    uid, text = ('%s' % textinfo).split('_')
+    tab = int(str(text)[0:2])
+    section = int(str(text)[2:4])
+    position = int(str(text)[4:7])
+    success, text = handle.sendtitle(str(uid),tab,section,position)
+    return jsonify(success=success, msg=text)
 
 @app.errorhandler(404)
 def page_not_found(error):
