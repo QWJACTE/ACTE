@@ -90,6 +90,12 @@ def getactinfo():
     success,actname,ownerid,ownername,actfullname,acttype,actcreate,actbegin,actend,actlocation,actintroduction = handle.getactmore(str(uid),tab,section,position)
     return jsonify(success=success,actname=actname,ownerid=ownerid,ownername=ownername,actfullname=actfullname,acttype=acttype,actcreate=actcreate,actbegin=actbegin,actend=actend,actlocation=actlocation,actintroduction=actintroduction)
 
+@app.route('/getsponsorpic/<sid>', methods=['GET'])
+def getsponsorpic(sid='1'):
+    sponsorid = int(str(sid))
+    imgurl = handle.sendspic(sponsorid)
+    return send_from_directory(os.path.join(app.root_path,'templates/img'),imgurl)
+
 @app.errorhandler(404)
 def page_not_found(error):
     return u'你走错门了'

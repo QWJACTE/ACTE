@@ -101,6 +101,9 @@ def updaterecommendation(uid):
 def findActByid(cursor,actid):
     return True if 1 == cursor.execute('select * from Activity where id ='+str(actid)) else False
 
+def findSponsorByid(cursor,sid):
+    return True if 1 == cursor.execute('select * from Sponsor where id ='+str(sid)) else False
+
 def sendimage(uid,imgtab,imgsection,imgposition):
     db, cursor = getDC()
     actid = imgposition+1
@@ -110,6 +113,16 @@ def sendimage(uid,imgtab,imgsection,imgposition):
     else:
         url='1'
     return url + '.jpg'
+
+def sendspic(sid):
+    db, cursor = getDC()
+    if findSponsorByid(cursor, sid):
+        a = cursor.fetchone()
+        url = a[7]
+        url = '1'
+    else:
+        url = '1'
+    return url+'.jpg'
 
 def sendtitle(uid,tab,section,position):
     db, cursor = getDC()
