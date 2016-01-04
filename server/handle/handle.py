@@ -122,6 +122,24 @@ def sendtitle(uid,tab,section,position):
     else:
         return False, 'none'
 
+def getactmore(uid,tab,section,position):
+    db, cursor = getDC()
+    actid = position+1
+    if findActByid(cursor, actid):
+        a = cursor.fetchone()
+        # actname,ownerid,ownername,actfullname,acttype,actcreate,actbegin,actend,actlocation,actintroduction
+        actname = a[2]
+        ownerid = a[1]
+        ownername = 'jamoeba'
+        actfullname = a[3]
+        acttype = a[10]
+        actcreate = a[5]
+        actbegin = a[6]
+        actend = a[7]
+        actlocation = a[9]
+        actintroduction = [8]
+        return True,actname,ownerid,ownername,actfullname,acttype,actcreate,actbegin,actend,actlocation,actintroduction
+
 def updaterecommendationimage(actid):
     db, cursor = getDC()
     if findActByid(cursor,actid):

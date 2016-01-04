@@ -80,6 +80,16 @@ def loadtext(textinfo='unknown_0101001'):
     success, text = handle.sendtitle(str(uid),tab,section,position)
     return jsonify(success=success, msg=text)
 
+@app.route('/getactinfo', methods=['POST'])
+def getactinfo():
+    actcode = request.form['actid']
+    uid = request.form['uid']
+    tab = int(str(actcode)[0:2])
+    section = int(str(actcode)[2:4])
+    position = int(str(actcode)[4:7])
+    success,actname,ownerid,ownername,actfullname,acttype,actcreate,actbegin,actend,actlocation,actintroduction = handle.getactmore(str(uid),tab,section,position)
+    return jsonify(success=success,actname=actname,ownerid=ownerid,ownername=ownername,actfullname=actfullname,acttype=acttype,actcreate=actcreate,actbegin=actbegin,actend=actend,actlocation=actlocation,actintroduction=actintroduction)
+
 @app.errorhandler(404)
 def page_not_found(error):
     return u'你走错门了'
