@@ -17,7 +17,7 @@ from flask import Flask, request, jsonify, render_template
 import MySQLdb
 
 def getDC():
-    db = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE)
+    db = MySQLdb.connect(HOST, USER, PASSWORD, DATABASE, charset='utf8')
     cursor = db.cursor()
     return db, cursor
 
