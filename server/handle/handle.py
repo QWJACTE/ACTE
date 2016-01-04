@@ -133,9 +133,9 @@ def getactmore(uid,tab,section,position):
         ownername = 'jamoeba'
         actfullname = a[3]
         acttype = a[10]
-        actcreate = a[5]
-        actbegin = a[6]
-        actend = a[7]
+        actcreate = str(a[5])
+        actbegin = str(a[6])
+        actend = str(a[7])
         actlocation = a[9]
         actintroduction = a[8]
         return True,actname,ownerid,ownername,actfullname,acttype,actcreate,actbegin,actend,actlocation,actintroduction
