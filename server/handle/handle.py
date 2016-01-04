@@ -137,7 +137,7 @@ def getactmore(uid,tab,section,position):
         actbegin = a[6]
         actend = a[7]
         actlocation = a[9]
-        actintroduction = [8]
+        actintroduction = a[8]
         return True,actname,ownerid,ownername,actfullname,acttype,actcreate,actbegin,actend,actlocation,actintroduction
 
 def updaterecommendationimage(actid):
