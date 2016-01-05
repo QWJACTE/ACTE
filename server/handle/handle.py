@@ -191,3 +191,14 @@ def updaterecommendationimage(actid):
         oneAct = 'nothing'
     db.close()
     return jsonify(success=success, actImg=oneAct)
+
+def queryForKey(cursor, category, key):
+    return cursor.execute('select * from Activity where id > 0')
+
+def searchfromact(category, key):
+    db, cursor = getDC()
+    act_num = queryForKey(cursor, category, key)
+    act_items = {}
+    for i in range(act_num):
+        act_items[i] = cursor.fetchone()[2]
+    return True,act_num,act_items

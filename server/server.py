@@ -2,7 +2,7 @@
 # -*- encoding=utf-8 -*-
 
 import os
-from flask import send_from_directory,Flask, request, jsonify, render_template
+from flask import send_from_directory,Flask, request, jsonify, render_template, json
 import socket
 from handle import *
 app = Flask(__name__)
@@ -89,6 +89,13 @@ def getactinfo():
     position = int(str(actcode)[4:7])
     success,actname,ownerid,ownername,actfullname,acttype,actcreate,actbegin,actend,actlocation,actintroduction = handle.getactmore(str(uid),tab,section,position)
     return jsonify(success=success,actname=actname,ownerid=ownerid,ownername=ownername,actfullname=actfullname,acttype=acttype,actcreate=actcreate,actbegin=actbegin,actend=actend,actlocation=actlocation,actintroduction=actintroduction)
+
+@app.route('/searchAct', methods=['POST'])
+def searchAct():
+    category = request.form['category']
+    key = request.form['key']
+    success,act_num,act_items=handle.searchfromact(category, key)
+    return jsonify(success=success,act_num=act_num,act_items=json.dumps(act_items))
 
 @app.route('/getuserinfo', methods=['POST'])
 def getuserinfo():
