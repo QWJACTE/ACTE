@@ -152,6 +152,24 @@ def getactmore(uid,tab,section,position):
         actlocation = a[9]
         actintroduction = a[8]
         return True,actname,ownerid,ownername,actfullname,acttype,actcreate,actbegin,actend,actlocation,actintroduction
+    else:
+        return False,'','','','','','','','','',''
+
+def getusermore(uid):
+    db,cursor = getDC()
+    if findUserByUid(cursor, uid):
+        a = cursor.fetchone()
+        # nickname,sex,birthday,email,location,description
+        nickname = a[3]
+        sex = a[4]
+        birthday = a[6]
+        email = a[7]
+        location = a[8]
+        description = a[9]
+        return True,nickname,sex,birthday,email,location,description
+    else:
+        return False,'','','','','',''
+
 
 def updaterecommendationimage(actid):
     db, cursor = getDC()

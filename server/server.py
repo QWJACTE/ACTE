@@ -90,6 +90,12 @@ def getactinfo():
     success,actname,ownerid,ownername,actfullname,acttype,actcreate,actbegin,actend,actlocation,actintroduction = handle.getactmore(str(uid),tab,section,position)
     return jsonify(success=success,actname=actname,ownerid=ownerid,ownername=ownername,actfullname=actfullname,acttype=acttype,actcreate=actcreate,actbegin=actbegin,actend=actend,actlocation=actlocation,actintroduction=actintroduction)
 
+@app.route('/getuserinfo', methods=['POST'])
+def getuserinfo():
+    uid = request.form['uid']
+    success,nickname,sex,birthday,email,location,description = handle.getusermore(str(uid))
+    return jsonify(success=success,nickname=nickname,sex=sex,birthday=birthday,email=email,location=location,description=description)
+
 @app.route('/getsponsorpic/<sid>', methods=['GET'])
 def getsponsorpic(sid='1'):
     sponsorid = int(str(sid))
