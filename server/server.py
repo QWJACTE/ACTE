@@ -102,6 +102,12 @@ def getsponsorpic(sid='1'):
     imgurl = handle.sendspic(sponsorid)
     return send_from_directory(os.path.join(app.root_path,'templates/img'),imgurl)
 
+@app.route('/getuserheadpic/<uid>', methods=['GET'])
+def getuserheadpic(uid='unknown'):
+    userid = str(uid)
+    imgurl = handle.sendheadpic(userid)
+    return send_from_directory(os.path.join(app.root_path,'templates/img'),imgurl)
+
 @app.errorhandler(404)
 def page_not_found(error):
     return u'你走错门了'

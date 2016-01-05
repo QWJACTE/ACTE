@@ -124,6 +124,15 @@ def sendspic(sid):
         url = '1'
     return url+'.jpg'
 
+def sendheadpic(uid):
+    db, cursor = getDC()
+    if findUserByUid(cursor, uid):
+        a = cursor.fetchone()
+        url = a[5]
+    else:
+        url = '1'
+    return url+'.jpg'
+
 def sendtitle(uid,tab,section,position):
     db, cursor = getDC()
     actid = position+1
