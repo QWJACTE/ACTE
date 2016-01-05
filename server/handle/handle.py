@@ -129,6 +129,7 @@ def sendheadpic(uid):
     if findUserByUid(cursor, uid):
         a = cursor.fetchone()
         url = a[5]
+        url = '1'
     else:
         url = '1'
     return url+'.jpg'
