@@ -160,12 +160,12 @@ def getusermore(uid):
     if findUserByUid(cursor, uid):
         a = cursor.fetchone()
         # nickname,sex,birthday,email,location,description
-        nickname = a[3]
-        sex = a[4]
-        birthday = a[6]
-        email = a[7]
-        location = a[8]
-        description = a[9]
+        nickname = str(a[3])
+        sex = str(a[4])
+        birthday = str(a[6])
+        email = str(a[7])
+        location = str(a[8])
+        description = str(a[9])
         return True,nickname,sex,birthday,email,location,description
     else:
         return False,'','','','','',''
